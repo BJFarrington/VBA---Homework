@@ -1,0 +1,48 @@
+Sub Data()
+
+
+
+For Each w_sheet In ActiveWorkbook.Worksheets
+
+w_sheet.Activate
+
+
+lrow = w_sheet.Cells(Rows.Count, 1).End(xlUp).Row
+
+Dim Ticker As String
+       
+Dim Volume As Double
+    Volume = 0
+Dim Rownum As Double
+    Rownum = 2
+    
+Dim i As Long
+
+Cells(1, 9).Value = "<Ticker>"
+Cells(1, 10).Value = "<Volume>"
+
+
+For i = 2 To lrow
+  
+    
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+    
+    Ticker = Cells(i, 1).Value
+                Cells(Rownum, 9).Value = Ticker
+                
+    Volume = Volume + Cells(i, 7).Value
+                Cells(Rownum, 10).Value = Volume
+                
+                Rownum = Rownum + 1
+                Volume = 0
+Else
+  
+    Volume = Volume + Cells(i, 7).Value
+
+End If
+        
+Next i
+
+Next w_sheet
+
+End Sub
